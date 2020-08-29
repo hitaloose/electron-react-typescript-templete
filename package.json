@@ -1,0 +1,73 @@
+{
+  "name": "electron-react-typescript",
+  "description": "descrição do programa electron",
+  "author": {
+    "name": "Hitalo Loose",
+    "email": "hitaloose@gmail.com"
+  },
+  "version": "1.0.0",
+  "main": "./dist/main.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npm-run-all -p dev:react electron:serve",
+    "dev:electron": "cross-env NODE_ENV=development webpack --config webpack/electron.js --mode development && npm run start:electron",
+    "dev:react": "cross-env NODE_ENV=development webpack-dev-server --config webpack/react.js --mode development",
+    "electron:serve": "wait-on http-get://localhost:4000/ && npm run dev:electron",
+    "start:electron": "electron .",
+    "build": "npm-run-all build:electron build:react",
+    "build:run": "npm-run-all build start:electron",
+    "build:electron": "webpack --config webpack/electron.js",
+    "build:react": "webpack --config webpack/react.js",
+    "package": "npm-run-all build package:dist",
+    "package:dist": "electron-builder --dir"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/react": "^16.9.48",
+    "@types/react-dom": "^16.9.8",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "babel-loader": "^8.1.0",
+    "electron": "^10.1.0",
+    "cross-env": "^7.0.2",
+    "electron-builder": "^22.8.0",
+    "eslint": "^7.7.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-typescript": "^2.2.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-import-helpers": "^1.1.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.1",
+    "typescript": "^4.0.2",
+    "wait-on": "^5.2.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "directories": {
+      "output": "packages"
+    }
+  },
+  "files": [
+    "package.json",
+    "dist/**"
+  ]
+}
